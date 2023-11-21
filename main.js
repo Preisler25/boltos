@@ -6,22 +6,10 @@ class Termek{
     }
 
     builderKosar = (kosar, display) => {
-        const card = document.createElement('div');
-        const card_name = document.createElement('div');
-        const card_price = document.createElement('div');
-        const del_btn = document.createElement('button');
-
-        del_btn.addEventListener('click', () => {
-            kosar.popProduct(this);
-        });
-
-        del_btn.textContent = 'Törlés';
-        card_name.textContent = this.nev;
-        card_price.textContent = this.ar + ' Ft';
-        card.appendChild(card_name);
-        card.appendChild(card_price);
-        card.appendChild(del_btn);
-
+        const card = newCard('bg-slate-800', 'flex-row', 'p-3');
+        newDiv(this.nev, 'text-white', 'p-2', 'm-1', card);
+        newDiv(this.ar + ' Ft', 'text-white', 'p-2', 'm-1', card);
+        newBtn('Törlés', 'bg-orange-700', () => {kosar.popProduct(this);}, card);
         display.appendChild(card);
     };
 
@@ -33,26 +21,12 @@ class Termek{
             }
         }
 
-        const card = document.createElement('div');
-        const card_name = document.createElement('div');
-        const card_price = document.createElement('div');
-        const img = document.createElement('img');
-        const btn = document.createElement('button');
+        const card = newCard('bg-slate-800', 'flex-col', 'p-3');
+        newDiv(this.nev, 'text-white', 'p-1', 'm-0', card);
+        newDiv(this.ar + ' Ft', 'text-white', 'p-1', 'm-0', card);
+        newImg('images/' + this.kep, this.nev, card);
+        newBtn('Kosárba', 'bg-orange-700', () => {kosar.addProduct(this);}, card);
 
-        btn.addEventListener('click', () => {
-            kosar.addProduct(this);
-        });
-        btn.textContent = 'Kosárba';
-
-        card_name.textContent = this.nev;
-        card_price.textContent = this.ar + ' Ft';
-        img.src = 'images/' + this.kep;
-        img.alt = this.nev;
-        card.appendChild(card_name);
-        card.appendChild(card_price);
-        card.appendChild(img);
-        card.appendChild(btn);
-    
         display.appendChild(card);
     };
 }
@@ -137,6 +111,46 @@ const loadData = (termekLista, kosar) => {
         termekLista.builder(kosar);
     });
 };
+
+const newImg = (src, alt, card) => {
+    const img = document.createElement('img');
+
+    img.classList.add('rounded');
+    img.classList.add('border-2');
+    img.classList.add('border-gray-600');
+    img.src = src;
+    img.alt = alt;
+    card.appendChild(img);
+}
+
+const newDiv = (text, color, p, m, card) => {
+    const div = document.createElement('div');
+    div.textContent = text;
+    div.classList.add(p);
+    div.classList.add(m);
+    div.classList.add(color);
+    card.appendChild(div);
+}
+
+const newBtn = (text, color, event, card) => {
+    const btn = document.createElement('button');
+    btn.textContent = text;
+    btn.classList.add('p-2');
+    btn.classList.add('rounded');
+    btn.classList.add(color);
+    btn.addEventListener('click', event);
+    card.appendChild(btn);
+}
+
+const newCard = (color, flex_dir, p) => {
+    const card = document.createElement('div');
+    card.classList.add(p);
+    card.classList.add('rounded');
+    card.classList.add(color);
+    card.classList.add('flex');
+    card.classList.add(flex_dir);
+    return card;
+}
 
 const display = document.querySelector('#kosar');
 const display_termek = document.querySelector('#termékek_cont');
