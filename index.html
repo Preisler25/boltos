@@ -34,27 +34,27 @@
                         <input id="kereso" class="block mt-1 w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 outline-none focus:ring-2 focus:outline-offset-2 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" placeholder="Search" required>
                     </div>
                 </div>
-                <div id="termékek_cont" class="grid grid-cols-2">
+                <div id="termékek_cont" class="grid grid-cols-2 gap-4 mt-5">
                     
                 </div>
             </div>
             <div id="szamoló">
                 <div id="szamoló_cont">
                     <div id="szamoló_eredmény">
-                        <div id="eredménys">A végösszeg: <span id="ar"></span> </div>
+                        <div id="eredménys">A végösszeg: <span id="ar" class="text-2xl"></span> Ft</div>
                     </div>
                     <div id="kosar" class="">
 
                     </div>
-                    <div id="szamoló_gombok">
-                        <button id="del">Törlés</button>
-                        <button id="pay">Fizetés</button>
+                    <div class="rounded p-2 flex justify-evenly">
+                        <button id="pay" class="bg-green-700 p-1 rounded">Fizetés</button>
+                        <button id="del" class="bg-orange-700 p-1 rounded">Ürités</button>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    <footer >
+    <footer class="fixed bottom-0 w-screen text-center">
         © Preisler András 11/E 2023
     </footer>
 </body>

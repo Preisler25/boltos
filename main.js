@@ -6,10 +6,10 @@ class Termek{
     }
 
     builderKosar = (kosar, display) => {
-        const card = newCard('bg-slate-800', 'flex-row', 'p-3');
+        const card = newCard(['bg-slate-800', 'flex', 'flex-row', 'rounded', 'm-1', 'justify-end']);
         newDiv(this.nev, 'text-white', 'p-2', 'm-1', card);
         newDiv(this.ar + ' Ft', 'text-white', 'p-2', 'm-1', card);
-        newBtn('Törlés', 'bg-orange-700', () => {kosar.popProduct(this);}, card);
+        newBtn('Törlés', 'bg-orange-700', 'p-2', 'm-1', () => {kosar.popProduct(this);}, card);
         display.appendChild(card);
     };
 
@@ -21,11 +21,11 @@ class Termek{
             }
         }
 
-        const card = newCard('bg-slate-800', 'flex-col', 'p-3');
-        newDiv(this.nev, 'text-white', 'p-1', 'm-0', card);
-        newDiv(this.ar + ' Ft', 'text-white', 'p-1', 'm-0', card);
-        newImg('images/' + this.kep, this.nev, card);
-        newBtn('Kosárba', 'bg-orange-700', () => {kosar.addProduct(this);}, card);
+        const card = newCard(['bg-slate-800', 'flex', 'flex-col', 'p-3', 'rounded']);
+        newDiv(this.nev, ['text-white', 'p-1', 'm-0'], card);
+        newDiv(this.ar + ' Ft', ['text-white', 'p-1', 'm-0'], card);
+        newImg('images/' + this.kep, this.nev, ['w-20', 'rounded', 'm-auto'], card);
+        newBtn('Kosárba', 'bg-orange-700', 'p-2', 'm-1', () => {kosar.addProduct(this);}, card);
 
         display.appendChild(card);
     };
@@ -112,43 +112,46 @@ const loadData = (termekLista, kosar) => {
     });
 };
 
-const newImg = (src, alt, card) => {
+const newImg = (src, alt, styles, card) => {
     const img = document.createElement('img');
 
-    img.classList.add('rounded');
-    img.classList.add('border-2');
-    img.classList.add('border-gray-600');
     img.src = src;
     img.alt = alt;
+
+    for (let i = 0; i < styles.length; i++) {
+        img.classList.add(styles[i]);
+    }
+
     card.appendChild(img);
 }
 
-const newDiv = (text, color, p, m, card) => {
+const newDiv = (text, styles, card) => {
     const div = document.createElement('div');
     div.textContent = text;
-    div.classList.add(p);
-    div.classList.add(m);
-    div.classList.add(color);
+    
+    for (let i = 1; i < styles.length; i++) {
+        div.classList.add(styles[i]);
+    }
+
     card.appendChild(div);
 }
 
-const newBtn = (text, color, event, card) => {
+const newBtn = (text, color, p, m, event, card) => {
     const btn = document.createElement('button');
     btn.textContent = text;
-    btn.classList.add('p-2');
+    btn.classList.add(p);
+    btn.classList.add(m);
     btn.classList.add('rounded');
     btn.classList.add(color);
     btn.addEventListener('click', event);
     card.appendChild(btn);
 }
 
-const newCard = (color, flex_dir, p) => {
+const newCard = (styles) => {
     const card = document.createElement('div');
-    card.classList.add(p);
-    card.classList.add('rounded');
-    card.classList.add(color);
-    card.classList.add('flex');
-    card.classList.add(flex_dir);
+    for (let i = 0; i < styles.length; i++) {
+        card.classList.add(styles[i]);
+    }
     return card;
 }
 
