@@ -7,9 +7,9 @@ class Termek{
 
     builderKosar = (kosar, display) => {
         const card = newCard(['bg-slate-800', 'flex', 'flex-row', 'rounded', 'm-1', 'justify-end']);
-        newDiv(this.nev, 'text-white', 'p-2', 'm-1', card);
-        newDiv(this.ar + ' Ft', 'text-white', 'p-2', 'm-1', card);
-        newBtn('Törlés', 'bg-orange-700', 'p-2', 'm-1', () => {kosar.popProduct(this);}, card);
+        newDiv(this.nev, ['text-white', 'p-1', 'm-2'], card);
+        newDiv(this.ar + ' Ft', ['text-white', 'p-1', 'm-2'], card);
+        newBtn('Törlés', ['bg-orange-700', 'p-2', 'm-1', 'rounded'], () => {kosar.popProduct(this);}, card);
         display.appendChild(card);
     };
 
@@ -25,7 +25,7 @@ class Termek{
         newDiv(this.nev, ['text-white', 'p-1', 'm-0'], card);
         newDiv(this.ar + ' Ft', ['text-white', 'p-1', 'm-0'], card);
         newImg('images/' + this.kep, this.nev, ['w-20', 'rounded', 'm-auto'], card);
-        newBtn('Kosárba', 'bg-orange-700', 'p-2', 'm-1', () => {kosar.addProduct(this);}, card);
+        newBtn('Kosárba', ['bg-orange-700', 'p-2', 'm-1', 'rounded'], () => {kosar.addProduct(this);}, card);
 
         display.appendChild(card);
     };
@@ -129,20 +129,21 @@ const newDiv = (text, styles, card) => {
     const div = document.createElement('div');
     div.textContent = text;
     
-    for (let i = 1; i < styles.length; i++) {
+    for (let i = 0; i < styles.length; i++) {
         div.classList.add(styles[i]);
     }
 
     card.appendChild(div);
 }
 
-const newBtn = (text, color, p, m, event, card) => {
+const newBtn = (text, styles, event, card) => {
     const btn = document.createElement('button');
     btn.textContent = text;
-    btn.classList.add(p);
-    btn.classList.add(m);
-    btn.classList.add('rounded');
-    btn.classList.add(color);
+    
+    for (let i = 0; i < styles.length; i++) {
+        btn.classList.add(styles[i]);
+    }
+
     btn.addEventListener('click', event);
     card.appendChild(btn);
 }
@@ -159,6 +160,10 @@ const display = document.querySelector('#kosar');
 const display_termek = document.querySelector('#termékek_cont');
 const ar_display = document.querySelector('#ar');
 
+const add_btn = document.querySelector('#manu_add');
+const manu_name = document.querySelector('#manu_nev');
+const manu_price = document.querySelector('#manu_ar');
+
 const search = document.querySelector('#kereso');
 
 const pay_btn = document.querySelector('#pay');
@@ -167,6 +172,19 @@ const del_btn = document.querySelector('#del');
 
 const kosar = new Cart(display, ar_display);
 const termekLista = new TermekLista(display_termek);
+
+
+add_btn.addEventListener('click', () => {
+    if (manu_name.value == '' || manu_price.value == '') {
+        alert('Nem adtál meg minden adatot!');
+        return;
+    }
+    const termek = new Termek(manu_name.value, parseInt(manu_price.value), 'default.jpg');
+    termekLista.addTermek(termek);
+    termekLista.builder(kosar);
+    manu_name.value = '';
+    manu_price.value = '';
+});
 
 pay_btn.addEventListener('click', () => {
     kosar.pay();
