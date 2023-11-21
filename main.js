@@ -179,6 +179,12 @@ add_btn.addEventListener('click', () => {
         alert('Nem adtál meg minden adatot!');
         return;
     }
+    
+    if (isNaN(parseInt(manu_price.value))) {
+        alert('Az ár nem szám!');
+        manu_price.value = '';
+        return;
+    }
     const termek = new Termek(manu_name.value, parseInt(manu_price.value), 'default.jpg');
     termekLista.addTermek(termek);
     termekLista.builder(kosar);
