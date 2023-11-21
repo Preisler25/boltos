@@ -1,0 +1,19 @@
+{
+    "termekek": [
+        {
+            "nev": "banán",
+            "ar": 1000,
+            "kep": "banan.jpg"
+        },
+        {
+            "nev": "alma",
+            "ar": 2000,
+            "kep": "alma.jpg"
+        },
+        {
+            "nev": "narancs",
+            "ar": 3000,
+            "kep": "narancs.jpg"
+        }
+    ]
+}
