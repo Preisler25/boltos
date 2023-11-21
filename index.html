@@ -9,33 +9,51 @@
     <link rel="stylesheet" href="app.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-slate-700 w-screen h-screen">
     <header>
-        <div>Bolti kassza</div>
-    </header>
-    <main class="flex justify-between">
-        <div id="kosar" class="bg-slate-700">
-
-        </div>
-        <div id="termék kereső">
-            <input type="text" id="kereső" placeholder="Keresés...">
-            <div id="termékek_cont">
-                
+        <nav class="">
+            <div class="flex flex-row bg-slate-800 shadow-lg p-2">
+                <a href="../index.html" class="bg-slate-900 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Vissza
+                </a>
+                <h1 class="text-4xl text-center text-white font-bold w-[100%]">Bolti kassza</h1>
             </div>
-        </div>
-        <div id="szamoló">
-            <div id="szamoló_cont">
-                <div id="szamoló_eredmény">
-                    <div id="eredménys">A végösszeg: <span id="ar"></span> </div>
+        </nav>
+    </header>
+    <main class="overscroll-none pt-10">
+        <div class="flex justify-between h-[88%] overflow-y-auto">
+            <div id="kosar" class="">
+
+            </div>
+            <div id="termék kereső">
+                <div>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </div>
+                        <input id="kereso" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" required>
+                    </div>
                 </div>
-                <div id="szamoló_gombok">
-                    <button id="del">Törlés</button>
-                    <button id="pay">Fizetés</button>
+                <div id="termékek_cont" class="grid grid-cols-2">
+                    
+                </div>
+            </div>
+            <div id="szamoló">
+                <div id="szamoló_cont">
+                    <div id="szamoló_eredmény">
+                        <div id="eredménys">A végösszeg: <span id="ar"></span> </div>
+                    </div>
+                    <div id="szamoló_gombok">
+                        <button id="del">Törlés</button>
+                        <button id="pay">Fizetés</button>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
-    <footer>
+    <footer >
         © Preisler András 11/E 2023
     </footer>
 </body>
