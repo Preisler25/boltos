@@ -156,6 +156,11 @@ const newCard = (styles) => {
     return card;
 }
 
+const error = ( text ) => {
+    const error_display = document.querySelector('#error');
+    error_display.textContent = text;
+}
+
 const display = document.querySelector('#kosar');
 const display_termek = document.querySelector('#termékek_cont');
 const ar_display = document.querySelector('#ar');
@@ -176,20 +181,21 @@ const termekLista = new TermekLista(display_termek);
 
 add_btn.addEventListener('click', () => {
     if (manu_name.value == '' || manu_price.value == '') {
-        alert('Nem adtál meg minden adatot!');
+        error('Nem adtál meg minden adatot!');
         return;
     }
-    
     if (isNaN(parseInt(manu_price.value))) {
-        alert('Az ár nem szám!');
+        error('Az ár nem szám!');
         manu_price.value = '';
         return;
     }
-    const termek = new Termek(manu_name.value, parseInt(manu_price.value), 'default.jpg');
+
+    const termek = new Termek(manu_name.value, parseInt(manu_price.value), 'def.jpg');
     termekLista.addTermek(termek);
     termekLista.builder(kosar);
     manu_name.value = '';
     manu_price.value = '';
+    error('');
 });
 
 pay_btn.addEventListener('click', () => {
